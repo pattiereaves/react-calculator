@@ -6,20 +6,30 @@ import NumberButtons from './NumberButtons'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [ calculation, setCalculation ] = useState<number|null>(null);
+  const [ operation, setOperation ] = useState<number[]>([]);
+
+  const updateOperation = (value: number) => {
+    const operationCopy = [...operation];
+    const currentValue = operationCopy.pop() || 0;
+
+
+    setOperation([...operationCopy, Number(`${currentValue}${value}`)])
+  }
 
   return (
     <>
       <div>
-        <Result />
+        {/* todo implement more than add */}
+        <Result calculation={operation.join('+')} />
         <div className="buttons">
           <OperationButtons />
           <ArithmeticButtons />
-          <NumberButtons />
+          <NumberButtons updateOperation={updateOperation} />
         </div>
       </div>
     </>
   )
 }
 
-export default App
+export default App;
