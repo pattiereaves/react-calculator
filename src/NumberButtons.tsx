@@ -1,9 +1,9 @@
 import './App.css'
 
 function NumberButtons({
-  updateOperation
+  updateLastValue: updateOperation
 }: {
-  updateOperation: (value: number) => void }
+  updateLastValue: (value: number) => void }
 ) {
 
   const NumberButton = ({value, className = 'number-button' }: { value: number, className?: string }) => {

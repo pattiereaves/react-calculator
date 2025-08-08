@@ -7,25 +7,34 @@ import './App.css'
 
 function App() {
   // const [ calculation, setCalculation ] = useState<number|null>(null);
-  const [ operation, setOperation ] = useState<number[]>([]);
+  const [ operation, setOperation ] = useState<(number|string)[]>([]);
 
-  const updateOperation = (value: number) => {
+  const updateLastValue = (value: number) => {
     const operationCopy = [...operation];
     const currentValue = operationCopy.pop() || 0;
 
+    if (typeof currentValue === 'number') {
+      setOperation([...operationCopy, Number(`${currentValue}${value}`)])
+      return;
+    }
 
-    setOperation([...operationCopy, Number(`${currentValue}${value}`)])
+    // Last value was an operator, so add the new value as the last value
+    setOperation([...operation, value])
+  }
+
+  const addOperator = (operator: string) => {
+    setOperation([...operation, operator])
   }
 
   return (
     <>
       <div>
         {/* todo implement more than add */}
-        <Result calculation={operation.join('+')} />
+        <Result calculation={operation.join(' ')} />
         <div className="buttons">
           <OperationButtons />
-          <ArithmeticButtons />
-          <NumberButtons updateOperation={updateOperation} />
+          <ArithmeticButtons addOperator={addOperator} />
+          <NumberButtons updateLastValue={updateLastValue} />
         </div>
       </div>
     </>
