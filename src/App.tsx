@@ -36,13 +36,27 @@ function App() {
   //   }
   // }
 
+  const clearAll = () => {
+    setOperation([]);
+    setShowEvaluation(false);
+  }
+
+  const clearLastOperator = () => {
+    const operationCopy = [...operation];
+    operationCopy.pop();
+    setOperation(operationCopy);
+  }
+
   return (
     <>
       <div>
         {/* todo implement more than add */}
         <Result operation={operation} showEvaluation={showEvaluation} />
         <div className="buttons">
-          <OperationButtons />
+          <OperationButtons
+            clearAll={clearAll}
+            clearLastOperator={clearLastOperator}
+          />
           <ArithmeticButtons addOperator={addOperator} setShowEvaluation={setShowEvaluation} />
           <NumberButtons updateLastValue={updateLastValue} />
         </div>

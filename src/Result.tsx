@@ -1,6 +1,20 @@
-import './App.css'
+import { useMemo } from "react"
 
 function Result({ showEvaluation, operation }: { showEvaluation: boolean, operation: (number|string)[] }) {
+
+  const calculatedResult: string | null = useMemo(() => {
+    if (!showEvaluation) {
+      return null;
+    }
+
+    try {
+      return eval(operation.join(''));
+    } catch (error) {
+      console.error(error);
+      return "Error";
+    }
+
+  }, [operation, showEvaluation]);
 
   return (
     <>
@@ -10,7 +24,7 @@ function Result({ showEvaluation, operation }: { showEvaluation: boolean, operat
         ))}
       </div>
       <div className="evaluation">
-        {showEvaluation && <span>{eval(operation.join(''))}</span>}
+        {calculatedResult}
       </div>
     </>
   )

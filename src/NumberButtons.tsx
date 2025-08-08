@@ -17,13 +17,13 @@ function NumberButtons({
   return (
     <>
     <div className="row">
-      {[7, 8, 9].map((value) => <NumberButton value={value} />)}
+      {[7, 8, 9].map((value) => <NumberButton value={value} key={`number-button-${value}`} />)}
     </div>
     <div className="row">
-      {[4, 5, 6].map((value) => <NumberButton value={value} />)}
+      {[4, 5, 6].map((value) => <NumberButton value={value} key={`number-button-${value}`} />)}
     </div>
     <div className="row">
-      {[1, 2, 3].map((value) => <NumberButton value={value} />)}
+      {[1, 2, 3].map((value) => <NumberButton value={value} key={`number-button-${value}`} />)}
     </div>
     <div className="row">
       <NumberButton value={0} className="zero-button" />
