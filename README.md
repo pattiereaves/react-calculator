@@ -1,69 +1,31 @@
-# React + TypeScript + Vite
+# React Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple four-function calculator built with React.
 
-Currently, two official plugins are available:
+## Project goals
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I wrote this in (roughly) 2 hours in one sitting. It implements a basic calculator with basic arithmetic features, a change sign button and a percent button. It is designed to look (more or less) like the iOS calculator.
 
-## Expanding the ESLint configuration
+## Production
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+https://pattiereaves.com/react-calculator/
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This project deploys on merges to main via Github pages.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Development
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+To work on this project,
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. `npm install`
+1. `npm run dev`
+1. http://localhost:5173/
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Known issues / Things I would address if I had more time
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Tests
+- Operations would stay in the same place (not move up when there is a result)
+- The clear button will not appear again if you add more to the operation after pressing it once.
+- Once you hit equals, it will keep evaluating the operation even if you add to it.
+- The classNames don't follow any convention.
+- The css isn't modularized.
+- Would refactor to useContext to avoid prop drilling.

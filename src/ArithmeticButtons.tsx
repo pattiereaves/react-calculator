@@ -1,12 +1,18 @@
 import './App.css'
 
 function ArithmeticButtons({
-  addOperator,
+  operation,
+  setOperation,
   setShowEvaluation,
 }: {
-  addOperator: (operator: string) => void;
+  operation: string[],
+  setOperation: (operation: string[]) => void
   setShowEvaluation: (showEvaluation: boolean) => void
 }) {
+
+  const addOperator = (operator: string) => {
+    setOperation([...operation, operator]);
+  }
 
   return (
     <div className='arithmetic-buttons'>

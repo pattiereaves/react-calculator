@@ -1,14 +1,35 @@
 import './App.css'
 
 function NumberButtons({
-  updateLastValue: updateOperation
+  operation,
+  setOperation,
 }: {
-  updateLastValue: (value: number|string) => void }
-) {
+  operation: string[],
+  setOperation: (operation: string[]) => void
+}) {
+
+  const updateLastValue = (value: number|string) => {
+    const operationCopy = [...operation];
+    const currentValue = operationCopy.pop() || '';
+
+    if (!isNaN(Number(currentValue))) {
+      setOperation([...operationCopy, `${currentValue}${value}`])
+      return;
+    }
+
+    if (currentValue === '.') {
+      setOperation([...operationCopy, `${currentValue}${value}`])
+      return;
+    }
+
+    // Last value was an operator, so add the new value as the last value
+    setOperation([...operation, value.toString()]);
+  }
+
 
   const NumberButton = ({value, className = 'number-button' }: { value: number, className?: string }) => {
     return (
-      <button className={className} onClick={() => updateOperation(value)}>
+      <button className={className} onClick={() => updateLastValue(value)}>
         {value}
       </button>
     )
@@ -27,7 +48,7 @@ function NumberButtons({
     </div>
     <div className="row">
       <NumberButton value={0} className="zero-button" />
-      <button className="number-button" onClick={() => updateOperation('.')}>.</button>
+      <button className="number-button" onClick={() => updateLastValue('.')}>.</button>
     </div>
     </>
   )

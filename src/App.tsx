@@ -6,67 +6,8 @@ import NumberButtons from './NumberButtons'
 import './App.css'
 
 function App() {
-  const [ operation, setOperation ] = useState<(number|string)[]>([]);
+  const [ operation, setOperation ] = useState<string[]>([]);
   const [ showEvaluation, setShowEvaluation ] = useState(false);
-
-  const updateLastValue = (value: number|string) => {
-    const operationCopy = [...operation];
-    const currentValue = operationCopy.pop() || '';
-
-    if (!isNaN(Number(currentValue))) {
-      setOperation([...operationCopy, `${currentValue}${value}`])
-      return;
-    }
-
-    if (currentValue === '.') {
-      setOperation([...operationCopy, `${currentValue}${value}`])
-      return;
-    }
-
-    // Last value was an operator, so add the new value as the last value
-    setOperation([...operation, value]);
-  }
-
-  const addOperator = (operator: string) => {
-    setOperation([...operation, operator]);
-  }
-
-  const allClear = () => {
-    setOperation([]);
-    setShowEvaluation(false);
-  }
-
-  const clearLastOperator = () => {
-    const operationCopy = [...operation];
-    operationCopy.pop();
-    setOperation(operationCopy);
-  }
-
-  const changeSign = () => {
-    const operationCopy = [...operation];
-    const currentValue = operationCopy.pop() || '';
-
-    if (!isNaN(Number(currentValue))) {
-      const invertedValue = Number(`-${currentValue}`).toString();
-      setOperation([...operationCopy, invertedValue]);
-      return;
-    }
-
-    setOperation([...operationCopy, '-']);
-  }
-
-  const percent = () => {
-    const operationCopy = [...operation];
-    const currentValue = operationCopy.pop() || '';
-
-    if (!isNaN(Number(currentValue))) {
-      const percentValue = (Number(currentValue) / 100).toString();
-      setOperation([...operationCopy, percentValue]);
-      return;
-    }
-
-    setOperation([...operationCopy, '%']);
-  }
 
   return (
     <>
@@ -76,14 +17,13 @@ function App() {
         <div className="buttons">
           <div className="main-button-group">
             <OperationButtons
-              allClear={allClear}
-              clearLastOperator={clearLastOperator}
-              changeSign={changeSign}
-              percent={percent}
+              operation={operation}
+              setOperation={setOperation}
+              setShowEvaluation={setShowEvaluation}
             />
-            <NumberButtons updateLastValue={updateLastValue} />
+            <NumberButtons operation={operation} setOperation={setOperation} />
           </div>
-          <ArithmeticButtons addOperator={addOperator} setShowEvaluation={setShowEvaluation} />
+          <ArithmeticButtons operation={operation} setOperation={setOperation} setShowEvaluation={setShowEvaluation} />
         </div>
       </div>
     </>
