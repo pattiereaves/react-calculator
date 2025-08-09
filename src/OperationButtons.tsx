@@ -2,23 +2,29 @@ import { useState } from 'react';
 import './App.css'
 
 function OperationButtons({
-  allClear: clearAll,
-  clearLastOperator
-}: { allClear: () => void, clearLastOperator: () => void }) {
+  allClear,
+  clearLastOperator,
+  changeSign,
+}: {
+  allClear: () => void;
+  clearLastOperator: () => void;
+  changeSign: () => void;
+}) {
 
-  const [ showClearAll, setShowClearAll ] = useState(false);
+  const [ showAllClear, setShowAllClear ] = useState(false);
 
+  // @todo this should be updated to show all clear when operators are added back.
   const handleClear = () => {
-    setShowClearAll(true);
+    setShowAllClear(true);
     clearLastOperator();
   }
 
   return (
     <>
-      {showClearAll && <button onClick={clearAll}>AC</button>}
-      {!showClearAll && <button onClick={handleClear}>AC</button>}
-      <button onClick={() => setShowClearAll(true)}>+/-</button>
-      <button onClick={() => setShowClearAll(true)}>%</button>
+      {showAllClear && <button onClick={allClear}>AC</button>}
+      {!showAllClear && <button onClick={handleClear}>AC</button>}
+      <button onClick={changeSign}>+/-</button>
+      <button onClick={() => setShowAllClear(true)}>%</button>
     </>
   )
 }

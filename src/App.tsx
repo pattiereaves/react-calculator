@@ -6,16 +6,19 @@ import NumberButtons from './NumberButtons'
 import './App.css'
 
 function App() {
-  // const [ calculation, setCalculation ] = useState<number|null>(null);
   const [ operation, setOperation ] = useState<(number|string)[]>([]);
   const [ showEvaluation, setShowEvaluation ] = useState(false);
-  // const [ stagedValue, setStagedValue ] = useState<string | null>(null);
 
-  const updateLastValue = (value: number) => {
+  const updateLastValue = (value: number|string) => {
     const operationCopy = [...operation];
     const currentValue = operationCopy.pop() || '';
 
-    if (typeof currentValue === 'number') {
+    if (!isNaN(Number(currentValue))) {
+      setOperation([...operationCopy, `${currentValue}${value}`])
+      return;
+    }
+
+    if (currentValue === '.') {
       setOperation([...operationCopy, `${currentValue}${value}`])
       return;
     }
@@ -39,6 +42,21 @@ function App() {
     setOperation(operationCopy);
   }
 
+  const changeSign = () => {
+    const operationCopy = [...operation];
+    const currentValue = operationCopy.pop() || '';
+
+    console.log({ currentValue });
+
+    if (!isNaN(Number(currentValue))) {
+      const invertedValue = Number(`-${currentValue}`).toString();
+      setOperation([...operationCopy, invertedValue]);
+      return;
+    }
+
+    setOperation([...operationCopy, '-']);
+  }
+
   return (
     <>
       <div>
@@ -48,6 +66,7 @@ function App() {
           <OperationButtons
             allClear={allClear}
             clearLastOperator={clearLastOperator}
+            changeSign={changeSign}
           />
           <ArithmeticButtons addOperator={addOperator} setShowEvaluation={setShowEvaluation} />
           <NumberButtons updateLastValue={updateLastValue} />
