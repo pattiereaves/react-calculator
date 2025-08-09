@@ -74,14 +74,16 @@ function App() {
         {/* todo implement more than add */}
         <Result operation={operation} showEvaluation={showEvaluation} />
         <div className="buttons">
-          <OperationButtons
-            allClear={allClear}
-            clearLastOperator={clearLastOperator}
-            changeSign={changeSign}
-            percent={percent}
-          />
+          <div className="main-button-group">
+            <OperationButtons
+              allClear={allClear}
+              clearLastOperator={clearLastOperator}
+              changeSign={changeSign}
+              percent={percent}
+            />
+            <NumberButtons updateLastValue={updateLastValue} />
+          </div>
           <ArithmeticButtons addOperator={addOperator} setShowEvaluation={setShowEvaluation} />
-          <NumberButtons updateLastValue={updateLastValue} />
         </div>
       </div>
     </>

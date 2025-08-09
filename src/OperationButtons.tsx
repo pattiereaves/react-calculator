@@ -22,12 +22,12 @@ function OperationButtons({
   }
 
   return (
-    <>
-      {showAllClear && <button onClick={allClear}>AC</button>}
-      {!showAllClear && <button onClick={handleClear}>AC</button>}
-      <button onClick={changeSign}>+/-</button>
-      <button onClick={percent}>%</button>
-    </>
+    <div className='operation-buttons'>
+      {showAllClear && <button className='operation-button' onClick={allClear}>AC</button>}
+      {!showAllClear && <button className='operation-button' onClick={handleClear}>AC</button>}
+      <button className='operation-button' onClick={changeSign}>+/-</button>
+      <button className='operation-button' onClick={percent}>%</button>
+    </div>
   )
 }
 

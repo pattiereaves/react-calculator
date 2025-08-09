@@ -9,7 +9,7 @@ function ArithmeticButtons({
 }) {
 
   return (
-    <>
+    <div className='arithmetic-buttons'>
       <button className="arithmetic-button" onClick={() => addOperator('/')}>÷</button>
       <button className="arithmetic-button" onClick={() => addOperator('*')}>×</button>
       <button className="arithmetic-button" onClick={() => addOperator('-')}>-</button>
@@ -17,7 +17,7 @@ function ArithmeticButtons({
 
       {/* Todo: when this button pressed, should evaluate string. */}
       <button className="arithmetic-button" onClick={() => setShowEvaluation(true)}>=</button>
-    </>
+    </div>
   )
 }
 
