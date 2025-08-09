@@ -3,7 +3,7 @@ import './App.css'
 function NumberButtons({
   updateLastValue: updateOperation
 }: {
-  updateLastValue: (value: number) => void }
+  updateLastValue: (value: number|string) => void }
 ) {
 
   const NumberButton = ({value, className = 'number-button' }: { value: number, className?: string }) => {
@@ -27,7 +27,7 @@ function NumberButtons({
     </div>
     <div className="row">
       <NumberButton value={0} className="zero-button" />
-      <button className="number-button">.</button>
+      <button className="number-button" onClick={() => updateOperation('.')}>.</button>
     </div>
     </>
   )

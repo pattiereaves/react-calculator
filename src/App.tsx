@@ -9,13 +9,14 @@ function App() {
   // const [ calculation, setCalculation ] = useState<number|null>(null);
   const [ operation, setOperation ] = useState<(number|string)[]>([]);
   const [ showEvaluation, setShowEvaluation ] = useState(false);
+  // const [ stagedValue, setStagedValue ] = useState<string | null>(null);
 
   const updateLastValue = (value: number) => {
     const operationCopy = [...operation];
-    const currentValue = operationCopy.pop() || 0;
+    const currentValue = operationCopy.pop() || '';
 
     if (typeof currentValue === 'number') {
-      setOperation([...operationCopy, Number(`${currentValue}${value}`)])
+      setOperation([...operationCopy, `${currentValue}${value}`])
       return;
     }
 
@@ -27,16 +28,7 @@ function App() {
     setOperation([...operation, operator]);
   }
 
-  // const addDecimal = () => {
-  //   const operationCopy = [...operation];
-  //   const currentValue = operationCopy.pop();
-
-  //   if (typeof currentValue === 'number') {
-  //     setOperation([...operationCopy, currentValue.toString(), '.'])
-  //   }
-  // }
-
-  const clearAll = () => {
+  const allClear = () => {
     setOperation([]);
     setShowEvaluation(false);
   }
@@ -54,7 +46,7 @@ function App() {
         <Result operation={operation} showEvaluation={showEvaluation} />
         <div className="buttons">
           <OperationButtons
-            clearAll={clearAll}
+            allClear={allClear}
             clearLastOperator={clearLastOperator}
           />
           <ArithmeticButtons addOperator={addOperator} setShowEvaluation={setShowEvaluation} />

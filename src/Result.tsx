@@ -8,10 +8,11 @@ function Result({ showEvaluation, operation }: { showEvaluation: boolean, operat
     }
 
     try {
+      // This is not the greatest security practice but it's a two-hour test.
       return eval(operation.join(''));
     } catch (error) {
       console.error(error);
-      return "Error";
+      return null;
     }
 
   }, [operation, showEvaluation]);

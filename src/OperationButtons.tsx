@@ -2,9 +2,9 @@ import { useState } from 'react';
 import './App.css'
 
 function OperationButtons({
-  clearAll,
+  allClear: clearAll,
   clearLastOperator
-}: { clearAll: () => void, clearLastOperator: () => void }) {
+}: { allClear: () => void, clearLastOperator: () => void }) {
 
   const [ showClearAll, setShowClearAll ] = useState(false);
 
@@ -19,7 +19,6 @@ function OperationButtons({
       {!showClearAll && <button onClick={handleClear}>AC</button>}
       <button onClick={() => setShowClearAll(true)}>+/-</button>
       <button onClick={() => setShowClearAll(true)}>%</button>
-      <button>%</button>
     </>
   )
 }
