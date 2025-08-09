@@ -46,8 +46,6 @@ function App() {
     const operationCopy = [...operation];
     const currentValue = operationCopy.pop() || '';
 
-    console.log({ currentValue });
-
     if (!isNaN(Number(currentValue))) {
       const invertedValue = Number(`-${currentValue}`).toString();
       setOperation([...operationCopy, invertedValue]);
@@ -55,6 +53,19 @@ function App() {
     }
 
     setOperation([...operationCopy, '-']);
+  }
+
+  const percent = () => {
+    const operationCopy = [...operation];
+    const currentValue = operationCopy.pop() || '';
+
+    if (!isNaN(Number(currentValue))) {
+      const percentValue = (Number(currentValue) / 100).toString();
+      setOperation([...operationCopy, percentValue]);
+      return;
+    }
+
+    setOperation([...operationCopy, '%']);
   }
 
   return (
@@ -67,6 +78,7 @@ function App() {
             allClear={allClear}
             clearLastOperator={clearLastOperator}
             changeSign={changeSign}
+            percent={percent}
           />
           <ArithmeticButtons addOperator={addOperator} setShowEvaluation={setShowEvaluation} />
           <NumberButtons updateLastValue={updateLastValue} />

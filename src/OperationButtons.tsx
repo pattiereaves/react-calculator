@@ -5,10 +5,12 @@ function OperationButtons({
   allClear,
   clearLastOperator,
   changeSign,
+  percent,
 }: {
   allClear: () => void;
   clearLastOperator: () => void;
   changeSign: () => void;
+  percent: () => void;
 }) {
 
   const [ showAllClear, setShowAllClear ] = useState(false);
@@ -24,7 +26,7 @@ function OperationButtons({
       {showAllClear && <button onClick={allClear}>AC</button>}
       {!showAllClear && <button onClick={handleClear}>AC</button>}
       <button onClick={changeSign}>+/-</button>
-      <button onClick={() => setShowAllClear(true)}>%</button>
+      <button onClick={percent}>%</button>
     </>
   )
 }
